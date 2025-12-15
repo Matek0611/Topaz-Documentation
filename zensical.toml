@@ -1,0 +1,89 @@
+[project]
+site_name = "Topaz Documentation"
+site_description = "Topaz Language Documentation"
+site_author = "Marcin Stefanowicz"
+site_url = "https://github.com/Matek0611/Topaz-Interpreter"
+
+copyright = """
+Copyright &copy; 2025 Marcin Stefanowicz & All Topaz Contributors
+"""
+
+extra_css = ["assets/stylesheets/extra.css"]
+extra_javascript = ["assets/javascripts/extra.js"]
+
+[project.theme]
+#custom_dir = "overrides"
+favicon = "assets/images/topaz_logo.png"
+logo = "assets/images/topaz_logo.png"
+repo = "assets/images/topaz_logo.png"
+language = "en"
+
+features = [
+    "announce.dismiss",
+
+    "content.action.edit",
+    "content.action.view",
+    "content.code.annotate",
+    "content.code.copy",
+    "content.code.select",
+    "content.footnote.tooltips",
+    "content.tabs.link",
+    "content.tooltips",
+
+    #"header.autohide",
+
+    "navigation.expand",
+    "navigation.footer",
+    "navigation.indexes",
+    "navigation.instant",
+    "navigation.instant.prefetch",
+    "navigation.instant.progress",
+    "navigation.path",
+    #"navigation.prune",
+    "navigation.sections",
+    "navigation.tabs",
+    #"navigation.tabs.sticky",
+    "navigation.top",
+    "navigation.tracking",
+
+    "search.highlight",
+
+    "toc.follow",
+    #"toc.integrate",
+]
+
+
+[[project.theme.palette]]
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+primary = "deep orange"
+accent = "orange"
+
+[[project.theme.palette]]
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+primary = "deep orange"
+accent = "orange"
+
+[project.theme.font]
+text = "Inter"
+code = "Jetbrains Mono"
+
+#[[project.extra.social]]
+#icon = "fontawesome/brands/github"
+#link = "https://github.com/user/repo"
+
+[project.extra.consent]
+title = "Cookie consent"
+description = """
+    We use cookies to recognize your repeated visits and preferences, as well
+    as to measure the effectiveness of our documentation and whether users
+    find what they're searching for. With your consent, you're helping us to
+    make our documentation better.
+""" 
+
+[project.extra.consent.cookies]
+analytics.name = "Google Analytics"
+github.name = "GitHub"

@@ -1,0 +1,30 @@
+:root {
+    --accent-yellow: rgb(252 184 56);
+    --accent-orange: rgb(200 106 8);
+    --accent-red: rgb(183 43 32);
+    --accent-purple: rgb(107 51 163);
+}
+
+* {
+    scroll-behavior: smooth;
+}
+
+.md-header {
+    border-bottom: 1px solid transparent;
+    transition: all 0.15s ease-in-out;
+}
+
+.md-header.md-header--shadow {
+    box-shadow: 0 0.4rem 1rem rgb(255 100 0 / 7%) !important;
+    border-image: linear-gradient(to right, var(--accent-yellow) 70%, var(--accent-red) 80%, var(--accent-purple) 100%) 3;
+    border-image-width: 0 0 2px 0;
+    border-image-repeat: stretch;
+}
+
+.md-header__title > .md-header__ellipsis > .md-header__topic:first-child > .md-ellipsis {
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(to right, var(--accent-yellow), var(--accent-orange), var(--accent-red), var(--accent-purple));
+}
