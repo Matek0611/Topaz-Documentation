@@ -1,8 +1,6 @@
----
-icon: lucide/rocket
----
-
 # Home
+
+:octicons-heart-fill-24:
 
 {{{compatibility:
 {
@@ -10,4 +8,4 @@ icon: lucide/rocket
   "firefox": { "version_added": "39" },
   "safari": { "version_added": false }
 } 
-}}}
+}}} 

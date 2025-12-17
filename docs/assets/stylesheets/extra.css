@@ -28,3 +28,24 @@
     background-clip: text;
     background-image: linear-gradient(to right, var(--accent-yellow), var(--accent-orange), var(--accent-red), var(--accent-purple));
 }
+
+.compat-table-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 0.5rem;
+}
+
+.compat-table-legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.compat-table-icon {
+    width: 18px;
+    height: 18px;
+    margin-inline-start: 15px;
+    margin-inline-end: 5px;
+    margin-block: 5px;
+    filter: brightness(93%) contrast(93%);
+}

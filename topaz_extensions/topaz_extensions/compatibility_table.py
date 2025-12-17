@@ -28,7 +28,7 @@ class CompatibilityBlockProcessor(BlockProcessor):
 
         for item in items:
             citem = etree.SubElement(container, 'div', {'class': 'compat-table-legend-item'})
-            etree.SubElement(etree.SubElement(citem, 'span', {'class': 'twemoji'}), 'img', {'src': '.icons/octicons/' + item[0] + '.svg', 'class': 'compat-table-icon'})
+            etree.SubElement(citem, 'img', {'src': 'assets/images/octicons/' + item[0] + '-16.svg', 'class': 'compat-table-icon'})
             etree.SubElement(citem, 'span').text = item[1]
 
     def run(self, parent, blocks):

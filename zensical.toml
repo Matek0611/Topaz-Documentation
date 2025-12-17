@@ -11,15 +11,13 @@ Copyright &copy; 2025 Marcin Stefanowicz & All Topaz Contributors
 extra_css = ["assets/stylesheets/extra.css"]
 extra_javascript = ["assets/javascripts/extra.js"]
 
-markdown_extensions = [
-    "attr_list", 
-    "pymdownx.emoji",
-    "topaz_extensions.compatibility_table"
-]
+[project.markdown_extensions.attr_list]
 
-[project.extension_configs.pymdownx.emoji]
-emoji_index = "zensical.extensions.emoji.twemoji"
-emoji_path = ".icons"
+[project.markdown_extensions.pymdownx.emoji]
+emoji_index = "zensical.extensions.emoji.twemoji" 
+emoji_generator = "zensical.extensions.emoji.to_svg"
+
+[project.markdown_extensions."topaz_extensions.compatibility_table"]
 
 [project.theme]
 #custom_dir = "overrides"
@@ -62,7 +60,6 @@ features = [
     #"toc.integrate",
 ]
 
-
 [[project.theme.palette]]
 scheme = "default"
 toggle.icon = "lucide/sun"
@@ -98,3 +95,6 @@ description = """
 analytics.name = "Google Analytics"
 github.name = "GitHub"
 checked = "true"
+
+[icons]
+paths = ["icons"]
