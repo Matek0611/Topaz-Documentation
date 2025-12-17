@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "topaz_extensions"
+version = "0.1.0"
+description = "Markdown Topaz extensions for Zensical"
+requires-python = ">=3.10"
+
+dependencies = [
+  "markdown>=3.4"
+]
+
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Framework :: MkDocs",
+  "Topic :: Documentation"
+]
+
+[tool.setuptools]
+packages = ["topaz_extensions"]
+
+[tool.setuptools.package-data]
+topaz_extensions = ["py.typed"]

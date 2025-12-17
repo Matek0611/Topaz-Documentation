@@ -11,6 +11,16 @@ Copyright &copy; 2025 Marcin Stefanowicz & All Topaz Contributors
 extra_css = ["assets/stylesheets/extra.css"]
 extra_javascript = ["assets/javascripts/extra.js"]
 
+markdown_extensions = [
+    "attr_list", 
+    "pymdownx.emoji",
+    "topaz_extensions.compatibility_table"
+]
+
+[project.extension_configs.pymdownx.emoji]
+emoji_index = "zensical.extensions.emoji.twemoji"
+emoji_path = ".icons"
+
 [project.theme]
 #custom_dir = "overrides"
 favicon = "assets/images/topaz_logo.png"
@@ -87,3 +97,4 @@ description = """
 [project.extra.consent.cookies]
 analytics.name = "Google Analytics"
 github.name = "GitHub"
+checked = "true"
