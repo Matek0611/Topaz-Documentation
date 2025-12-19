@@ -3,6 +3,8 @@
     --accent-orange: rgb(200 106 8);
     --accent-red: rgb(183 43 32);
     --accent-purple: rgb(107 51 163);
+    --color-border-primary: light-dark(#c3c7cb, #51565d);
+    --table-border: 1px solid var(--color-border-primary);
 }
 
 * {
@@ -29,11 +31,62 @@
     background-image: linear-gradient(to right, var(--accent-yellow), var(--accent-orange), var(--accent-red), var(--accent-purple));
 }
 
+.compat-block {
+    margin: 10px;
+    overflow-x: auto;
+    width: 100%;
+    display: block;
+    white-space: nowrap;
+}
+
+.compat-table {
+    border-collapse: collapse;
+    border-radius: 0.5rem;
+    border-spacing: 0px;
+    width: fit-content;
+    overflow: hidden;
+    border: 1px solid transparent;
+    outline: var(--table-border);
+    outline-offset: -2px;
+}
+
+.compat-table tbody {
+    width: fit-content;
+}
+
+.compat-table > thead th:first-child {
+    min-width: 300px;
+    max-width: 400px;
+    width: 350px;
+}
+
+.compat-table-system {
+    align-items: center;
+    vertical-align: middle;
+    min-width: 60px;
+    width: 60px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    position: sticky;
+    top: 0;
+}
+
+.compat-table-system span {
+    font-weight: 500;
+    white-space: nowrap;
+    padding-inline: 25px;
+}
+
+.compat-table td, .compat-table th {
+    padding: 0.25rem;
+    border: var(--table-border);
+}
+
 .compat-table-legend {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    font-size: 0.5rem;
+    font-size: 0.65rem;
 }
 
 .compat-table-legend-item {
@@ -47,5 +100,5 @@
     margin-inline-start: 15px;
     margin-inline-end: 5px;
     margin-block: 5px;
-    filter: brightness(93%) contrast(93%);
+    color: #555;
 }

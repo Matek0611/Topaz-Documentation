@@ -4,8 +4,12 @@
 
 {{{compatibility:
 {
-  "chrome": { "version_added": "42" },
-  "firefox": { "version_added": "39" },
-  "safari": { "version_added": false }
-} 
+    "Windows": [
+        {"feature": "test", "support": "full", "version": "10", "timeline": [] }
+    ],
+    "macOS": [
+        {"feature": "test2", "support": "full", "version": "26", "timeline": ["xx"] }
+    ],
+    "Linux": []
+}
 }}} 

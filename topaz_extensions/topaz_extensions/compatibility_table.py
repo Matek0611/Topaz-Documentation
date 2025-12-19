@@ -3,11 +3,18 @@ from html import escape
 from markdown.extensions import Extension
 from markdown.blockprocessors import BlockProcessor
 from xml.etree import ElementTree as etree
+import topaz_extensions.icons as icons
 
 '''
 Format:
 {{{compatibility:
-
+{
+    "Windows": [
+        {"feature": "x", "support": "full", "version": "10", "timeline": [] }
+    ],
+    "macOS": [...],
+    "Linux": [...],...
+}
 }}}
 '''
 
@@ -18,20 +25,22 @@ class CompatibilityBlockProcessor(BlockProcessor):
     def generate_legend(self, element: etree.Element):
         container = etree.SubElement(element, 'div', {'class': 'compat-table-legend'})
         items = [
-            ('check-circle', 'Full support.'),
-            ('skip', 'Partial support.'),
-            ('x-circle', 'No support.'),
-            ('no-entry', 'Deprecated. Do not use in new scripts.'),
-            ('issue-opened', 'Experimental. Expect behavior to change in the future.'),
-            ('kebab-horizontal', 'See implementation notes.')
+            (icons.ICON_FULL_COMPATIBILITY, 'Full support.'),
+            (icons.ICON_PARTIAL_COMPATIBILITY, 'Partial support.'),
+            (icons.ICON_NO_COMPATIBILITY, 'No support.'),
+            (icons.ICON_DEPRECATED, 'Deprecated. Do not use in new scripts.'),
+            (icons.ICON_EXPERIMENTAL, 'Experimental. Expect behavior to change in the future.'),
+            (icons.ICON_DOTS, 'See implementation notes.')
         ]
 
         for item in items:
             citem = etree.SubElement(container, 'div', {'class': 'compat-table-legend-item'})
-            etree.SubElement(citem, 'img', {'src': 'assets/images/octicons/' + item[0] + '-16.svg', 'class': 'compat-table-icon'})
+            etree.SubElement(citem, 'div', {'class': 'compat-table-icon'}).text = item[0]
             etree.SubElement(citem, 'span').text = item[1]
 
     def run(self, parent, blocks):
+        etree.SubElement(parent, 'h2').text = 'Operating system compatibility'
+
         block = blocks.pop(0)
 
         lines = block.splitlines()
@@ -47,35 +56,43 @@ class CompatibilityBlockProcessor(BlockProcessor):
         try:
             data = json.loads(raw_json)
         except json.JSONDecodeError as e:
-            pre = etree.SubElement(parent, 'pre')
+            pre = etree.SubElement(parent, 'em')
             pre.text = f'Invalid compatibility JSON: {e}'
             return
 
-        table = etree.SubElement(parent, 'table')
-        table.set('class', 'compat-table')
-
+        table = etree.SubElement(etree.SubElement(parent, 'div', {'class': 'compat-block'}), 'table', {'class': 'compat-table'})
         thead = etree.SubElement(table, 'thead')
-        tr = etree.SubElement(thead, 'tr')
-
-        etree.SubElement(tr, 'th').text = 'Browser'
-        etree.SubElement(tr, 'th').text = 'Support'
-
         tbody = etree.SubElement(table, 'tbody')
+        trhead = etree.SubElement(thead, 'tr')
+        etree.SubElement(trhead, 'th')
 
-        for browser, info in data.items():
-            tr = etree.SubElement(tbody, 'tr')
+        for system in data.keys():
+            thsystem = etree.SubElement(trhead, 'th', {'class': 'compat-table-system'})
+            etree.SubElement(thsystem, 'span').text = system
 
-            etree.SubElement(tr, 'th').text = browser.capitalize()
+        fresult = {
+            feature: {
+                os_name: {k: v for k, v in f.items() if k != "feature"}
+                for os_name, features in data.items()
+                for f in features
+                if f["feature"] == feature
+            }
+            for feature in {f["feature"] for features in data.values() for f in features}
+        }
 
-            support = info.get('version_added', '—')
+        for fname, fvalue in fresult.items():
+            trbody = etree.SubElement(tbody, 'tr')
+            tdinfo = etree.SubElement(trbody, 'td')
+            tdinfo.text = fname
 
-            td = etree.SubElement(tr, 'td')
-            if support is False:
-                td.text = '❌'
-            elif support is True:
-                td.text = '✔️'
-            else:
-                td.text = escape(str(support))
+            for system in data.keys():
+                tdinfo = etree.SubElement(trbody, 'td')
+
+                if system not in fvalue.keys():
+                    tdinfo.text = 'none'
+                    continue
+
+                tdinfo.text = 'x'
 
         self.generate_legend(parent)
 
