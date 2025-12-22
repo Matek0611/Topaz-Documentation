@@ -14,6 +14,7 @@
 
 * {
     scroll-behavior: smooth;
+    scrollbar-color: var(--gray-color) transparent;
 }
 
 .md-header {
@@ -144,4 +145,132 @@
 
 .compat-experimental {
     color: var(--purple-color);
+}
+
+.compat-dialog {
+    width: 480px;
+    max-width: 95vw;
+    border: 1px solid rgb(0 0 0 / 0.3);
+    height: fit-content;
+    max-height: 75vh;
+    overflow-y: auto;
+    border-radius: 15px;
+    box-shadow: 0 0 60px #0000000d;
+    word-break: break-all;
+    padding-top: 0 !important;
+}
+
+.compat-dialog-topbar {
+    top: 0;
+    position: sticky;
+    background: linear-gradient(to bottom, var(--md-primary-bg-color) 75%, transparent);
+    z-index: 99;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: space-between;
+}
+
+.compat-dialog-topbar h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.25rem;
+    font-weight: 400;
+    max-width: 90%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.compat-dialog dl {
+    position: relative;
+    margin: 0;
+}
+
+.compat-table-dt { 
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: .25rem;
+    margin-block: 20px;
+    --icon-size: 20px;
+}
+
+.compat-table-dt div:first-child {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    color: var(--accent-yellow);
+    min-width: fit-content;
+}
+
+.compat-table-dt:not(:last-of-type)::after {
+    content: "";
+    position: absolute;
+    left: calc(calc(var(--icon-size) - 6px) / 2);
+    top: 22px;
+    height: 100%;
+    width: 2px;
+    background: var(--color-border-primary);
+}
+
+dialog {
+    z-index: 999;
+    opacity: 0;
+    transform: scale(0.75);
+}
+
+dialog:open {
+    opacity: 1;
+    transform: scale(1);
+}
+
+@starting-style {
+  dialog:open {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+}
+
+dialog::backdrop {
+    transition: all 0.2s ease-in-out;
+    background: rgba(200, 200, 200, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+@starting-style {
+  dialog:open::backdrop {
+    background-color: transparent;
+  }
+}
+
+.dialog-close {
+    outline: 2px solid transparent;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    font-size: 1rem;
+    line-height: 1;
+    color: #555;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.dialog-close:hover {
+    background-color: rgba(180, 0, 0, 0.15);
+    color: var(--accent-red);
+    transform: scale(1.05);
+}
+
+.dialog-close:focus-visible {
+    outline: 2px solid var(--accent-red);
+    outline-offset: 2px;
+}
+
+.dialog-close:active {
+    transform: scale(0.95);
 }

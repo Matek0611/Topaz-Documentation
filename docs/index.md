@@ -9,7 +9,7 @@
     ],
     "macOS": [
         {"feature": "test", "support": "partial", "version": "10", "timeline": [] },
-        {"feature": "test2", "support": "full", "version": "26", "timeline": ["xx"] }
+        {"feature": "test2", "support": "full", "version": "26", "timeline": [[true, "x", "2025"],[true, "x", "2025"],[false, "x", "2025"],[true, "x", "2025"]] }
     ],
     "Linux": [
         {"feature": "test", "support": "experimental", "version": "1", "timeline": [] },

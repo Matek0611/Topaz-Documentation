@@ -1,5 +1,6 @@
 import json
 from html import escape
+import uuid
 from markdown.extensions import Extension
 from markdown.blockprocessors import BlockProcessor
 from xml.etree import ElementTree as etree
@@ -10,7 +11,7 @@ Format:
 {{{compatibility:
 {
     "Windows": [
-        {"feature": "x", "support": "full", "version": "10", "timeline": [] }
+        {"feature": "x", "support": "full", "version": "10", "timeline": [[true, "x", "2025"]] }
     ],
     "macOS": [...],
     "Linux": [...],...
@@ -35,7 +36,7 @@ class CompatibilityBlockProcessor(BlockProcessor):
 
         return '\n'.join(json_lines)
     
-    def generate_compat_item(self, parent, icon, title, add_more, color_class):
+    def generate_compat_item(self, global_parent, parent, feature, system, icon, title, add_more, color_class):
         parent.set('class', color_class)
         compat_item = etree.SubElement(parent, 'div', {'class': 'compat-table-item'})
         
@@ -44,9 +45,26 @@ class CompatibilityBlockProcessor(BlockProcessor):
         if title:
             etree.SubElement(compat_item, 'span').text = title
         if add_more:
-            etree.SubElement(compat_item, 'span', {'style': 'color: #555; cursor: pointer;'}).text = icons.ICON_DOTS
+            id = f'dg{uuid.uuid1().hex}'
+            dialog = etree.SubElement(global_parent, 'dialog', {'id': id, 'class': 'compat-dialog'})
+            top_bar = etree.SubElement(dialog, 'div', {'class': 'compat-dialog-topbar'})
+
+            if feature and system:
+                etree.SubElement(top_bar, 'h1', {'title': f'{feature} ({system})'}).text = f'{feature} (<em>{system}</em>)'
+
+            etree.SubElement(top_bar, 'form', {'method': 'dialog'}).text = '<button class="dialog-close">&times;</button>'
+
+            timeline_dl = etree.SubElement(etree.SubElement(dialog, 'div'), 'dl')
+            for part in add_more:
+                tdt = etree.SubElement(timeline_dl, 'dt', {'class': 'compat-table-dt'})
+                etree.SubElement(tdt, 'div').text = icons.ICON_DISC if part[0] else icons.ICON_SEMI_DISC
+                etree.SubElement(tdt, 'span').text = (f'<strong>{part[2]}</strong><br>' if part[2] else '') + part[1]
+
+            morebtn = etree.SubElement(compat_item, 'span', {'style': 'color: #555; cursor: pointer;', 'onclick': f'document.getElementById("{id}").showModal()'})
+            morebtn.text = icons.ICON_DOTS
     
     def generate_table(self, parent, data):
+        global_parent = etree.SubElement(parent, 'div')
         table = etree.SubElement(etree.SubElement(parent, 'div', {'class': 'compat-block'}), 'table', {'class': 'compat-table'})
         thead = etree.SubElement(table, 'thead')
         tbody = etree.SubElement(table, 'tbody')
@@ -76,22 +94,22 @@ class CompatibilityBlockProcessor(BlockProcessor):
                 tdinfo = etree.SubElement(trbody, 'td')
 
                 if system not in fvalue.keys():
-                    self.generate_compat_item(tdinfo, icons.ICON_NO_COMPATIBILITY, 'No', False, 'compat-no-support')
+                    self.generate_compat_item(global_parent, tdinfo, fname, system, icons.ICON_NO_COMPATIBILITY, 'No', False, 'compat-no-support')
                     continue
 
                 fivalue = fvalue[system]
 
                 match fivalue.get('support', ''):
                     case 'full': 
-                        self.generate_compat_item(tdinfo, icons.ICON_FULL_COMPATIBILITY, fivalue.get('version', 'Yes'), fivalue.get('timeline', ''), 'compat-supported')
+                        self.generate_compat_item(global_parent, tdinfo, fname, system, icons.ICON_FULL_COMPATIBILITY, fivalue.get('version', 'Yes'), fivalue.get('timeline', ''), 'compat-supported')
                     case 'partial':
-                        self.generate_compat_item(tdinfo, icons.ICON_PARTIAL_COMPATIBILITY, fivalue.get('version', 'Partial'), fivalue.get('timeline', ''), 'compat-partial-support')
+                        self.generate_compat_item(global_parent, tdinfo, fname, system, icons.ICON_PARTIAL_COMPATIBILITY, fivalue.get('version', 'Partial'), fivalue.get('timeline', ''), 'compat-partial-support')
                     case 'deprecated':
-                        self.generate_compat_item(tdinfo, icons.ICON_DEPRECATED, fivalue.get('version', 'Obsolete'), fivalue.get('timeline', ''), 'compat-deprecated')
+                        self.generate_compat_item(global_parent, tdinfo, fname, system, icons.ICON_DEPRECATED, fivalue.get('version', 'Obsolete'), fivalue.get('timeline', ''), 'compat-deprecated')
                     case 'experimental':
-                        self.generate_compat_item(tdinfo, icons.ICON_EXPERIMENTAL, fivalue.get('version', 'New'), fivalue.get('timeline', ''), 'compat-experimental')
+                        self.generate_compat_item(global_parent, tdinfo, fname, system, icons.ICON_EXPERIMENTAL, fivalue.get('version', 'New'), fivalue.get('timeline', ''), 'compat-experimental')
                     case _:
-                        self.generate_compat_item(tdinfo, icons.ICON_NO_COMPATIBILITY, fivalue.get('version', 'No'), fivalue.get('timeline', ''), 'compat-no-support')
+                        self.generate_compat_item(global_parent, tdinfo, fname, system, icons.ICON_NO_COMPATIBILITY, fivalue.get('version', 'No'), fivalue.get('timeline', ''), 'compat-no-support')
     
     def generate_legend(self, element: etree.Element):
         container = etree.SubElement(element, 'div', {'class': 'compat-table-legend'})
