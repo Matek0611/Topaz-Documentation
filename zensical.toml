@@ -2,20 +2,32 @@
 site_name = "Topaz Documentation"
 site_description = "Topaz Language Documentation"
 site_author = "Marcin Stefanowicz"
-site_url = "https://github.com/Matek0611/Topaz-Interpreter"
+site_url = "https://github.com/Matek0611/Topaz-Documentation"
+repo_url = https://github.com/Matek0611/Topaz-Interpreter
 
 copyright = """
 Copyright &copy; 2025 Marcin Stefanowicz & All Topaz Contributors
 """
 
-extra_css = ["assets/stylesheets/extra.css"]
-extra_javascript = ["assets/javascripts/extra.js"]
+extra_css = [
+    "assets/stylesheets/extra.css",
+    "https://unpkg.com/katex@0/dist/katex.min.css"
+]
+extra_javascript = [
+    "assets/javascripts/extra.js",
+    "assets/javascripts/katex.js",
+    "https://unpkg.com/katex@0/dist/katex.min.js",
+    "https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"
+]
 
 [project.markdown_extensions.attr_list]
 
 [project.markdown_extensions.pymdownx.emoji]
 emoji_index = "zensical.extensions.emoji.twemoji" 
 emoji_generator = "zensical.extensions.emoji.to_svg"
+
+[project.markdown_extensions.pymdownx.arithmatex]
+generic = true
 
 [project.markdown_extensions."topaz_extensions.compatibility_table"]
 
@@ -94,7 +106,6 @@ description = """
 [project.extra.consent.cookies]
 analytics.name = "Google Analytics"
 github.name = "GitHub"
-checked = "true"
 
 [icons]
 paths = ["icons"]
