@@ -3,7 +3,8 @@ site_name = "Topaz Documentation"
 site_description = "Topaz Language Documentation"
 site_author = "Marcin Stefanowicz"
 site_url = "https://github.com/Matek0611/Topaz-Documentation"
-repo_url = "https://github.com/Matek0611/Topaz-Documentation"
+repo_url = "https://github.com/Matek0611/Topaz-Interpreter"
+repo_name = "Topaz Repository"
 
 copyright = """
 Copyright &copy; 2025 Marcin Stefanowicz & All Topaz Contributors
@@ -68,8 +69,8 @@ language = "en"
 features = [
     "announce.dismiss",
 
-    "content.action.edit",
-    "content.action.view",
+    #"content.action.edit",
+    #"content.action.view",
     "content.code.annotate",
     "content.code.copy",
     "content.code.select",
@@ -129,6 +130,7 @@ description = """
     find what they're searching for. With your consent, you're helping us to
     make our documentation better.
 """ 
+actions = ["accept", "reject"]
 
 [project.extra.consent.cookies]
 analytics.name = "Google Analytics"
