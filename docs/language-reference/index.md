@@ -9,6 +9,26 @@ This reference guide details the language's fundamental syntax and logic in a co
 
 [stdlib]: ../standard-library/
 
+## Table of contents
+
+1. [Introduction][intro]
+1. [Tokens][tokens]
+1. [Literals][literals]
+1. [Strings][strings]
+1. [Operators][ops]
+1. [Statements][stmts]
+1. [Expressions][exprs]
+
+[intro]: ./introduction/
+[tokens]: ./tokens/
+[literals]: ./literals/
+[strings]: ./strings/
+[ops]: ./operators/
+[stmts]: ./statements/
+[exprs]: ./expressions/
+
+## Useful resources
+
 For those seeking a different starting point:
 
 ??? info "New Users"
