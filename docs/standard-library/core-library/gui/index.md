@@ -1,4 +1,5 @@
 ---
+title: Core GUI Library
 tags:
     - Standard Library
     - Core Library
