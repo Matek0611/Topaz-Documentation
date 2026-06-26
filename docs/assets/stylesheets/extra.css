@@ -79,8 +79,10 @@
 
 .compat-table-system span {
     font-weight: 500;
-    white-space: nowrap;
+    white-space: wrap;
     padding-inline: 25px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .compat-table td, .compat-table th {
@@ -111,6 +113,7 @@
     flex-wrap: wrap;
     align-items: center;
     font-size: 0.65rem;
+    margin-bottom: 10px;
 }
 
 .compat-table-legend-item {
@@ -156,7 +159,7 @@
     overflow-y: auto;
     border-radius: 15px;
     box-shadow: 0 0 60px #0000000d;
-    word-break: break-all;
+    word-break: auto-phrase;
     padding-top: 0 !important;
 }
 
