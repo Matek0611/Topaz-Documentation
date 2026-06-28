@@ -152,7 +152,8 @@
         }
     }
 
-    .grid.cards span.twemoji, .grid.cards strong:first-of-type {
+    .grid.cards span.twemoji,
+    .grid.cards strong:first-of-type {
         font-size: 1em;
         vertical-align: middle;
         padding-bottom: 10px;
@@ -176,9 +177,20 @@
 
     .grid.cards>ul>li:hover {
         background: color-mix(in srgb, var(--md-default-bg-color) 70%, transparent) !important;
-        border: 1px solid var(--accent-purple) !important; 
+        border: 1px solid var(--accent-purple) !important;
         transform: scale(1.05);
         z-index: 100;
+    }
+
+    .tabbed-labels.tabbed-labels--linked:has(>:nth-child(4):last-child) {
+        justify-content: flex-start;
+        box-shadow: none !important;
+    }
+
+    @media screen and (width > 450px) {
+        .tabbed-labels.tabbed-labels--linked:has(>:nth-child(4):last-child) {
+            justify-content: center;
+        }
     }
 </style>
 
@@ -247,5 +259,33 @@
 </div>
 
 {{ page.content }}
+
+<div class="grid cards" markdown>
+<ul>
+{% set posts_count = 0 %}
+{% set posts_max = 4 %}
+{% for p in nav["items"] if p["title"] == "Blog" %}
+    {% for year in p["children"] | sort(attribute='year', reverse=True) %}
+        {% for post in year["children"] | sort(attribute='meta.date', reverse=True) %}
+            {% if posts_count < posts_max %}
+            <li>
+                <p style="text-align: left;">
+                    <strong style="font-size: 1.25em;">{{ post.title }}</strong><br>
+                    <em class="text-muted">{{ post.meta["date"] }}</em>
+                </p>
+                <p>{{ post.meta["description"] if post.meta["description"] else "" }}</p>
+                <p style="text-align: right;">
+                    <a href="{{ post.url }}" class="md-button" style="margin-top: 10px;">Read post...</a>
+                </p>
+            </li>
+            {% set posts_count = posts_count + 1 %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
+</ul>
+</div>
+
+<br><br>
 
 {% endblock %}

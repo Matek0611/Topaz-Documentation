@@ -150,5 +150,11 @@ github.name = "GitHub"
 [project.extra.status]
 new = "Recently added"
 
+[project.plugins]
+blog = { blog_dir = "blog" }
+"awesome-pages" = {}
+
+[project.plugins.macros]
+
 [icons]
 paths = ["icons"]

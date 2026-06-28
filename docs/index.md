@@ -31,7 +31,7 @@ template: home_page.html
     Declare asynchronous functions and run them in parallel. Inbuilt thread pool and async queue workers will handle everything for you.
 
 -   :material-shield-half-full: __Memory Safety__<br>
-    Objects are fully managed by the garbage collector. Only external pointers must be checked.
+    Objects are fully managed by the garbage collector. Only external pointers should be checked.
 
 -   :material-file-cog: __Preprocessor__<br>
     You can create source code that may be optimized before compilation.
@@ -191,3 +191,52 @@ template: home_page.html
     Application.Title := 'Test';
     Application.Run();
     ```
+
+## Run Modes
+
+=== ":material-script-text-outline: Module run"
+    <div class="window">
+        <div class="titlebar">Terminal</div>
+        <div class="body">
+            <div class="window-line">__project&gt;__&nbsp;topaz -m fib.tpz 3 10</div>
+            <div class="window-line">Fibonacci sequence from the 3rd to 10th term:</div>
+            <div class="window-line">1&emsp;2&emsp;3&emsp;5&emsp;8&emsp;13&emsp;21&emsp;34</div>
+            <div class="window-line">__project&gt;__&nbsp;<span class="cursor"></span></div>
+        </div>
+    </div>
+
+=== ":material-sticker-text-outline: Inline code"
+    <div class="window">
+        <div class="titlebar">Terminal</div>
+        <div class="body">
+            <div class="window-line">__project&gt;__ topaz -c "var i := 100; while i do begin Print(i * 2, ' '); i -= 1; end; PrintLine();"</div>
+            <div class="window-line">&nbsp;</div>
+            <div class="window-line">100&emsp;99&emsp;98&emsp;97&emsp;96&emsp;95&emsp;94&emsp;93&emsp;92&emsp;91&emsp;90&emsp;89&emsp;88&emsp;87&emsp;86&emsp;85&emsp;84&emsp;83&emsp;82&emsp;81&emsp;80&emsp;79&emsp;78&emsp;77&emsp;76&emsp;75&emsp;74&emsp;73&emsp;72&emsp;71&emsp;70&emsp;69&emsp;68&emsp;67&emsp;66&emsp;65&emsp;64&emsp;63&emsp;62&emsp;61&emsp;60&emsp;59&emsp;58&emsp;57&emsp;56&emsp;55&emsp;54&emsp;53&emsp;52&emsp;51&emsp;50&emsp;49&emsp;48&emsp;47&emsp;46&emsp;45&emsp;44&emsp;43&emsp;42&emsp;41&emsp;40&emsp;39&emsp;38&emsp;37&emsp;36&emsp;35&emsp;34&emsp;33&emsp;32&emsp;31&emsp;30&emsp;29&emsp;28&emsp;27&emsp;26&emsp;25&emsp;24&emsp;23&emsp;22&emsp;21&emsp;20&emsp;19&emsp;18&emsp;17&emsp;16&emsp;15&emsp;14&emsp;13&emsp;12&emsp;11&emsp;10&emsp;9&emsp;8&emsp;7&emsp;6&emsp;5&emsp;4&emsp;3&emsp;2&emsp;1</div>
+            <div class="window-line">__project&gt;__&nbsp;<span class="cursor"></span></div>
+        </div>
+    </div>
+
+=== ":material-arrow-right-drop-circle-outline: REPL"
+    <div class="window">
+        <div class="titlebar">Terminal</div>
+        <div class="body">
+            <div class="window-line">__project&gt;__&nbsp;topaz</div>
+            <div class="window-line">__&gt;&gt;&gt;__&nbsp;PrintLine(|val TOPAZ_NATIVE|);</div>
+            <div class="window-line">true</div>
+            <div class="window-line">__&gt;&gt;&gt;__&nbsp;var x := 1;</div>
+            <div class="window-line">__...__&nbsp;while x < 20 do </div>
+            <div class="window-line">__...__&nbsp;&nbsp;PrintLine(x *= 2);</div>
+            <div class="window-line">__...__&nbsp;<span class="cursor"></span></div>
+        </div>
+    </div>
+
+=== ":material-text-box-edit-outline: Text-based IDE"
+    <div class="window">
+        <div class="titlebar">Terminal</div>
+        <div class="body">
+            <div class="window-line">_Coming soon..._</div>
+        </div>
+    </div>
+    
+
+## Blog Posts
