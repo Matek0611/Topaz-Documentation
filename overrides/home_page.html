@@ -2,13 +2,250 @@
 
 {% block content %}
 
-<style> 
-.md-content h1:first-of-type {
-    display: none;
-}
+<style>
+    #home {
+        display: none;
+    }
+
+    .md-main__inner {
+        max-width: 1000px !important;
+        display: block !important;
+    }
+
+    h2 {
+        text-align: center;
+        padding-block: 20px;
+        margin-top: 3.5rem !important;
+    }
+
+    @media (max-width: 1219px) {
+        .md-main__inner {
+            display: flex !important;
+        }
+    }
+
+    #bg-particle-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .bg-css-particle {
+        position: absolute;
+        bottom: -20px;
+        background-color: color-mix(in srgb, var(--gray-color) var(--opacity), transparent);
+        border-radius: 50%;
+        width: var(--size);
+        height: var(--size);
+        will-change: transform;
+        animation: floatUpBg var(--duration) linear infinite;
+        animation-delay: var(--delay);
+    }
+
+    @keyframes floatUpBg {
+        0% {
+            transform: translate3d(var(--x-start), 0, 0);
+        }
+
+        100% {
+            transform: translate3d(var(--x-end), -105vh, 0);
+        }
+    }
+
+    .hero-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 40px 0 60px 0;
+        gap: 40px;
+    }
+
+    .hero-text {
+        flex: 1.2;
+        text-align: center;
+    }
+
+    .hero-image {
+        transform: scale(0.8);
+    }
+
+    @media screen and (min-width: 60em) {
+        .hero-container {
+            flex-direction: row;
+            gap: 60px;
+            padding: 80px 0 100px 0;
+        }
+
+        .hero-text {
+            flex: 1.2;
+            text-align: left;
+        }
+
+        .hero-image {
+            flex: 0.8;
+            display: flex;
+            justify-content: center;
+            transform: scale(1);
+        }
+    }
+
+    .hero-title {
+        font-size: 2.2rem !important;
+        font-weight: 800 !important;
+        line-height: 1.15 !important;
+        letter-spacing: -0.02em !important;
+        margin-bottom: 16px !important;
+    }
+
+    .hero-tagline {
+        font-size: 1.15rem !important;
+        line-height: 1.45 !important;
+        color: var(--md-typeset-color, #666);
+        opacity: 0.85;
+        margin-bottom: 32px !important;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+    }
+
+    @media screen and (min-width: 60em) {
+        .hero-buttons {
+            justify-content: flex-start;
+        }
+    }
+
+    .hero-logo-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-logo-neon {
+        font-size: 140px;
+        line-height: 1;
+        filter: drop-shadow(0 0 60px rgba(131, 0, 254, 0.3));
+        animation: floating 4s infinite ease-in-out;
+    }
+
+    @keyframes floating {
+        0% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-10px);
+            filter: drop-shadow(0 0 80px rgba(254, 135, 0, 0.3));
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    .grid.cards span.twemoji, .grid.cards strong:first-of-type {
+        font-size: 1em;
+        vertical-align: middle;
+        padding-bottom: 10px;
+    }
+
+    .grid.cards span.twemoji {
+        color: var(--accent-purple);
+        --md-icon-size: 2.5rem !important;
+    }
+
+    .md-button--primary {
+        background: var(--md-typeset-color) !important;
+        color: light-dark(var(--accent-yellow), var(--accent-orange)) !important;
+    }
+
+    .grid.cards>ul>li {
+        background: var(--md-default-bg-color) !important;
+        transform: scale(1);
+        transition: all 0.2s ease-in-out !important;
+    }
+
+    .grid.cards>ul>li:hover {
+        background: color-mix(in srgb, var(--md-default-bg-color) 70%, transparent) !important;
+        border: 1px solid var(--accent-purple) !important; 
+        transform: scale(1.05);
+        z-index: 100;
+    }
 </style>
 
-<div>test</div>
+<script>
+    function initParticles(container) {
+        if (!container || container.children.length > 0) return;
+
+        document.querySelector('.md-main').appendChild(container);
+
+        const particleCount = 60;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('bg-css-particle');
+
+            const size = (Math.random() * 8 + 1) + 'px';
+            const xStart = (Math.random() * 100) + 'vw';
+            const xEnd = `calc(${xStart} + ${(Math.random() * 50 - Math.random() * 50)}vw)`;
+            const duration = (Math.random() * 30 + 10) + 's';
+            const delay = (Math.random() * -40) + 's';
+            const opacity = Math.random() * 0.25 + 0.05;
+
+            particle.style.setProperty('--size', size);
+            particle.style.setProperty('--x-start', xStart);
+            particle.style.setProperty('--x-end', xEnd);
+            particle.style.setProperty('--duration', duration);
+            particle.style.setProperty('--delay', delay);
+            particle.style.setProperty('--opacity', `${opacity * 100}%`);
+
+            container.appendChild(particle);
+        }
+    }
+
+    function checkContainer() {
+        const container = document.getElementById('bg-particle-container');
+        if (container)
+            initParticles(container);
+    }
+
+    checkContainer();
+
+    if (!window.zensicalParticleWatcher)
+        window.zensicalParticleWatcher = setInterval(checkContainer, 600);
+</script>
+
+<div id="bg-particle-container"></div>
+
+<div class="hero-container" markdown>
+
+    <div class="hero-image">
+        <div class="hero-logo-wrapper">
+            <span class="hero-logo-neon"><img src="./assets/images/topaz_logo.png" width="250"></span>
+        </div>
+    </div>
+
+    <div class="hero-text">
+        <span class="hero-title"><span class="gradient-text">Topaz</span><br>Programming<br>Language</span>
+        <p class="hero-tagline">Modern, fast and register-based interpreted programming language</p>
+
+        <div class="hero-buttons">
+            <a href="./get-started/" class="md-button md-button--primary">Get started</a>
+            <a href="./language-reference/" class="md-button">See documentation</a>
+        </div>
+    </div>
+
+</div>
+
 {{ page.content }}
 
 {% endblock %}
