@@ -4,5 +4,5 @@ tags:
     - Core Library
 ---
 
-# JSON files management
+# JSON files
 

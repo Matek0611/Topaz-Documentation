@@ -91,7 +91,7 @@ features = [
 
     #"header.autohide",
 
-    "navigation.expand",
+    #"navigation.expand",
     "navigation.footer",
     "navigation.indexes",
     "navigation.instant",
@@ -151,8 +151,8 @@ github.name = "GitHub"
 new = "Recently added"
 
 [project.plugins]
-blog = { blog_dir = "blog" }
 "awesome-pages" = {}
+"git-revision-date-localized" = { type = "date", locale = "en", fallback_to_build_date = true }
 
 [project.plugins.macros]
 
