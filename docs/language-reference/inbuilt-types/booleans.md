@@ -21,7 +21,9 @@ var SomeFlag: Boolean := 2; // converted to true
 const Truth := true; // inferred as boolean
 ```
 
-## Logical Operations and Conversions
+## Logical operations and conversions
 
-[See comparison operators :material-arrow-top-right:](language-reference/operations/comparison/){ .md-button }
+All comparison operations result in logical values.
+
+[See comparison operators :material-arrow-top-right:](/language-reference/operations/comparison/){ .md-button }
 

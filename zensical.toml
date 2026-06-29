@@ -2,8 +2,8 @@
 site_name = "Topaz Documentation"
 site_description = "Topaz Language Documentation"
 site_author = "Marcin Stefanowicz"
-site_url = "https://github.com/Matek0611/Topaz-Documentation"
-repo_url = "https://github.com/Matek0611/Topaz-Interpreter"
+site_url = "https://matek0611.github.io/Topaz-Documentation/"
+repo_url = "https://github.com/Matek0611/Topaz-Interpreter/"
 repo_name = "Topaz Repository"
 
 copyright = """
