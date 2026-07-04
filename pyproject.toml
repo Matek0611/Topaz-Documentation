@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "topaz_extensions"
+version = "1.0.0"
+dependencies = [
+    "markdown",
+    "pygments"
+]
+
+[tool.setuptools]
+packages = ["topaz_extensions"]
+
+[project.entry-points."pygments.lexers"]
+topaz = "topaz_extensions.topaz_lexer:TopazLexer"
+tpz = "topaz_extensions.topaz_lexer:TopazLexer"

@@ -104,17 +104,17 @@ img {
 
 @media screen and (min-width: 76.25em) {
     .md-sidebar--primary {
-        animation: sidebar-prim-show-anim 0.3s ease-in-out forwards;
+        animation: sidebar-prim-show-anim 0.1s ease-in-out forwards;
     }
 
     .md-sidebar--secondary {
-        animation: sidebar-sec-show-anim 0.3s ease-in-out forwards;
+        animation: sidebar-sec-show-anim 0.1s ease-in-out forwards;
     }
 }
 
 .md-header {
     border-bottom: 1px solid transparent;
-    transition: all 0.15s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .md-header.md-header--shadow {
@@ -255,8 +255,9 @@ img {
     max-height: 75vh;
     overflow-y: auto;
     border-radius: 15px;
-    box-shadow: 0 0 60px #0000000d;
+    box-shadow: 0 0 60px #0000000a;
     word-break: auto-phrase;
+    padding: 2em;
     padding-top: 0 !important;
 }
 
@@ -275,7 +276,7 @@ img {
 .compat-dialog-topbar h1 {
     margin: 0;
     padding: 0;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 400;
     max-width: 90%;
     text-overflow: ellipsis;
@@ -292,7 +293,7 @@ img {
     position: relative;
     display: flex;
     flex-direction: row;
-    gap: .25rem;
+    gap: .5rem;
     margin-block: 20px;
     --icon-size: 20px;
 }

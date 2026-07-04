@@ -8,7 +8,7 @@ import topaz_extensions.icons as icons
 
 '''
 Format:
-{{{compatibility:
+:::compatibility
 {
     "Windows": [
         {"feature": "x", "support": "full", "version": "10", "timeline": [[true, "x", "2025"]] }
@@ -16,23 +16,36 @@ Format:
     "macOS": [...],
     "Linux": [...],...
 }
-}}}
+:::
 '''
 
 class CompatibilityBlockProcessor(BlockProcessor):
     def test(self, parent, block):
-        return block.startswith('{{{compatibility:')
+        return block.strip().startswith(':::compatibility')
     
     def get_raw_json(self, blocks):
-        block = blocks.pop(0)
-
-        lines = block.splitlines()
         json_lines = []
+        found_end = False
 
-        for line in lines[1:]:
-            if line.strip() == '}}}':
+        while blocks:
+            block = blocks.pop(0)
+            lines = block.splitlines()
+            start_idx = 0
+                
+            for idx, line in enumerate(lines[start_idx:]):
+                match line.strip():
+                    case ':::compatibility':
+                        continue
+                    case ':::':
+                        found_end = True
+                        remaining = lines[start_idx + idx + 1:]
+                        if remaining:
+                            blocks.insert(0, '\n'.join(remaining))
+                        break
+                json_lines.append(line)
+                
+            if found_end:
                 break
-            json_lines.append(line)
 
         return '\n'.join(json_lines)
     
@@ -52,7 +65,7 @@ class CompatibilityBlockProcessor(BlockProcessor):
             if feature and system:
                 etree.SubElement(top_bar, 'h1', {'title': f'{feature} ({system})'}).text = f'{feature} (<em>{system}</em>)'
 
-            etree.SubElement(top_bar, 'form', {'method': 'dialog'}).text = '<button class="dialog-close">&times;</button>'
+            etree.SubElement(top_bar, 'form', {'method': 'dialog'}).text = '<button class="dialog-close">&#x1F5D9;</button>'
 
             timeline_dl = etree.SubElement(etree.SubElement(dialog, 'div'), 'dl')
             for part in add_more:

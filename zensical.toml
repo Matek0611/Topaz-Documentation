@@ -21,11 +21,6 @@ extra_javascript = [
     "https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"
 ]
 
-dependencies = [
-    "pygments",
-    "topaz_extensions"
-]
-
 [project.markdown_extensions.attr_list]
 
 [project.markdown_extensions.pymdownx.emoji]
@@ -66,9 +61,6 @@ alternate_style = true
 permalink = "#"
 
 [project.markdown_extensions."topaz_extensions.compatibility_table"]
-
-[project.entry-points."pygments.lexers"]
-topaz = "topaz_extensions.topaz_lexer:TopazLexer"
 
 [project.theme]
 custom_dir = "overrides"

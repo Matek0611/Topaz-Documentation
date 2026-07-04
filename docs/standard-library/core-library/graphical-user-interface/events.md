@@ -100,7 +100,7 @@ end;
 ```
 
 
-{{{compatibility:
+:::compatibility
 {
     "Windows": [
         {"feature": "Base events", "support": "full", "version": "10", "timeline": [] },
@@ -124,4 +124,4 @@ end;
         {"feature": "Touch events", "support": "no", "version": "", "timeline": [] }
     ]
 }
-}}}
+:::
