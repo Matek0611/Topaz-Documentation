@@ -2,7 +2,7 @@
 tags:
     - Standard Library
     - Core Library
+    - RegEx
 ---
 
-# Topaz Core Library
-
+# Regular expressions

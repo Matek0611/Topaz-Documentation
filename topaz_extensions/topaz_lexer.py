@@ -53,6 +53,7 @@ class TopazLexer(RegexLexer):
             (r'\s+', Text),
             # single-line comments
             (r'//.*$', Comment.Single),
+            (r'\|!.*$', Comment.Single),
             # multi-line comments
             (r'\{\*\* ', Comment.Doc, 'doccomment'),
             (r'\{', Comment.Multiline, 'comment'),

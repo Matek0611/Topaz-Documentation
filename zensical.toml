@@ -89,6 +89,7 @@ features = [
     "navigation.instant",
     "navigation.instant.prefetch",
     "navigation.instant.progress",
+    "navigation.instant.previews",
     "navigation.path",
     #"navigation.prune",
     "navigation.sections",
