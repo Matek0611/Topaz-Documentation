@@ -39,33 +39,29 @@
     }
 }
 
-@keyframes sidebar-prim-show-anim {
-    from {
-        opacity: 0.5;
-        transform: translateX(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes sidebar-sec-show-anim {
-    from {
-        opacity: 0.5;
-        transform: translateX(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
 p,
 img {
     vertical-align: middle;
+}
+
+details {
+    interpolate-size: allow-keywords;
+}
+
+details::details-content {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+            height 0.3s ease-out,
+            opacity 0.3s ease-out,
+            content-visibility 0.3s ease-out;
+    transition-behavior: allow-discrete;
+}
+
+details[open]::details-content {
+    height: auto;
+    opacity: 1;
 }
 
 .text-muted {
@@ -102,14 +98,8 @@ img {
     animation: content-show-anim 0.25s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 }
 
-@media screen and (min-width: 76.25em) {
-    .md-sidebar--primary {
-        animation: sidebar-prim-show-anim 0.1s ease-in-out forwards;
-    }
-
-    .md-sidebar--secondary {
-        animation: sidebar-sec-show-anim 0.1s ease-in-out forwards;
-    }
+.md-main {
+    background-image: linear-gradient(180deg, color-mix(var(--accent-yellow), transparent 95%), transparent 120px);
 }
 
 .md-header {
@@ -124,13 +114,17 @@ img {
     border-image-repeat: stretch;
 }
 
-.md-header__title>.md-header__ellipsis>.md-header__topic:first-child>.md-ellipsis,
+.md-header__title > .md-header__ellipsis > .md-header__topic:first-child > .md-ellipsis,
 .gradient-text {
     -webkit-text-fill-color: transparent;
     text-fill-color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
     background-image: linear-gradient(to right, var(--accent-yellow), var(--accent-orange), var(--accent-red), var(--accent-purple));
+}
+
+.md-nav__title {
+    background: transparent !important;
 }
 
 .compat-block {
@@ -156,7 +150,7 @@ img {
     width: fit-content;
 }
 
-.compat-table>thead th:first-child {
+.compat-table > thead th:first-child {
     min-width: 300px;
     max-width: 400px;
     width: 350px;
@@ -379,12 +373,12 @@ dialog::backdrop {
 .window {
     width: 100%;
     max-width: 600px;
-    background-color: #1e1e1e;
+    background-color: var(--md-code-bg-color);
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    outline: 2px solid var(--accent-orange);
+    outline: 1.5px solid var(--accent-orange);
     outline-offset: -1px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), 0 0 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
     font-family: Inter, "Segoe UI Variable Text", "Segoe UI", -apple-system, sans-serif;
     margin: 20px auto;
     height: 300px !important;
@@ -392,12 +386,12 @@ dialog::backdrop {
 
 .titlebar {
     height: 36px;
-    background-color: #2c2c2c;
+    background-color: var(--accent-purple);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 0 0 16px;
-    font-size: 12px;
+    font-size: 0.9em;
     color: #ffffff;
     font-weight: 400;
     letter-spacing: 0.2px;
@@ -414,10 +408,6 @@ dialog::backdrop {
     display: block;
     width: 135px;
     height: 12px;
-    background: linear-gradient(to right,
-            #ffffff 0px, #ffffff 10px, transparent 10px, transparent 18px,
-            transparent 18px, transparent 20px, #ffffff 20px, #ffffff 30px, #ffffff 20px, #ffffff 22px, transparent 22px, transparent 28px, #ffffff 28px, #ffffff 30px, transparent 30px, transparent 36px,
-            #ffffff 36px, #ffffff 46px);
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0.7;
@@ -425,7 +415,7 @@ dialog::backdrop {
 }
 
 .body {
-    background-color: #1e1e1e;
+    background-color: var(--md-code-bg-color);
     color: #e5e5e5;
     padding: 16px;
     font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace !important;
@@ -441,9 +431,10 @@ dialog::backdrop {
 .window-line, .window-line > * {
     overflow: hidden;
     vertical-align: middle;
+    color: var(--md-code-hl-name-color);
 }
 
-.window-line>strong {
+.window-line > strong {
     color: var(--accent-orange);
     vertical-align: middle;
 }

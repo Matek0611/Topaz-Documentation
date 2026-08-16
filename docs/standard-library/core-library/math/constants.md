@@ -27,7 +27,7 @@ The mathematical constant $\tau=2\pi=6.28318...$, to available precision. It is 
 
 ## `SILVER_RATIO`
 
-The mathematical constant $\sigma=1+\sqrt{2}=...$, to available precision. It is the positive solution of the equation $x^2=2x+1$.
+The mathematical constant $\sigma=1+\sqrt{2}=2.41421...$, to available precision. It is the positive solution of the equation $x^2=2x+1$.
 
 ## `SQRT2`
 

@@ -73,7 +73,7 @@ Code:
 
 ```topaz linenums="1"
 PrintLine(
-  Core.Regex.Match(
+  Core.RegEx.Match(
     '\d{4}-\d{2}-\d{2}', 
     'Event date: 2026-08-02'
   )
@@ -91,7 +91,7 @@ Code:
 
 ```topaz linenums="1"
 PrintLine(
-  Core.Regex.Search(
+  Core.RegEx.Search(
     '(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})', 
     'Today is 2026-08-02, next week is 2026-08-09.'
   )
@@ -123,7 +123,7 @@ Code:
 
 ```topaz linenums="1"
 PrintLine(
-  Core.Regex.Replace(
+  Core.RegEx.Replace(
     '(\d{4})-(\d{2})-(\d{2})',
     'today is 2026-07-10', 
     '$3/$2/$1'

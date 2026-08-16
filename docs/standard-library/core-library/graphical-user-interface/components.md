@@ -3,7 +3,8 @@ tags:
     - Standard Library
     - Core Library
     - GUI
+    - Development
 ---
 
-# GUI and no-GUI components
+# GUI and No-GUI Components
 

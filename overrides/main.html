@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if page.meta and page.meta.tags %}
+{% if "Planned" in page.meta.tags %}
+<div class="admonition tip">
+    <p class="admonition-title">Planned Feature</p>
+    <p>This feature is currently planned for a future update and is not yet available.</p>
+</div>
+{% elif "Development" in page.meta.tags %}
+<div class="admonition warning">
+    <p class="admonition-title">Under Development</p>
+    <p>This functionality is actively being built. Content and behavior may change.</p>
+</div>
+{% elif "Deprecated" in page.meta.tags %}
+<div class="admonition danger">
+    <p class="admonition-title">Deprecated</p>
+    <p>This feature is outdated or no longer supported and may be removed in future versions.</p>
+</div>
+{% elif "Info" in page.meta.tags %}
+<div class="admonition info">
+    <p class="admonition-title">Information</p>
+    <p>Please note the specific usage notes or guidelines applicable to this page.</p>
+</div>
+{% endif %}
+{% endif %}
+
+{{ super() }}
+{% endblock %}

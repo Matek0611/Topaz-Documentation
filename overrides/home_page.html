@@ -16,35 +16,13 @@
         text-align: center;
         padding-block: 20px;
         margin-top: 3.5rem !important;
+        font-size: 1.5rem !important;
     }
 
     @media (max-width: 1219px) {
         .md-main__inner {
             display: flex !important;
         }
-    }
-
-    #bg-particle-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: -1;
-        overflow: hidden;
-        pointer-events: none;
-    }
-
-    .bg-css-particle {
-        position: absolute;
-        bottom: -20px;
-        background-color: color-mix(in srgb, var(--gray-color) var(--opacity), transparent);
-        border-radius: 50%;
-        width: var(--size);
-        height: var(--size);
-        will-change: transform;
-        animation: floatUpBg var(--duration) linear infinite;
-        animation-delay: var(--delay);
     }
 
     @keyframes floatUpBg {
@@ -71,10 +49,6 @@
         text-align: center;
     }
 
-    .hero-image {
-        transform: scale(0.8);
-    }
-
     @media screen and (min-width: 60em) {
         .hero-container {
             flex-direction: row;
@@ -86,27 +60,25 @@
             flex: 1.2;
             text-align: left;
         }
-
-        .hero-image {
-            flex: 0.8;
-            display: flex;
-            justify-content: center;
-            transform: scale(1);
-        }
     }
 
     .hero-title {
         font-size: 2.2rem !important;
-        font-weight: 800 !important;
+        font-weight: 300 !important;
         line-height: 1.15 !important;
         letter-spacing: -0.02em !important;
         margin-bottom: 16px !important;
     }
 
+    .hero-title > .gradient-text {
+        font-size: 2.5rem !important;
+        font-weight: 500 !important;
+    }
+
     .hero-tagline {
-        font-size: 1.15rem !important;
+        font-size: 1rem !important;
         line-height: 1.45 !important;
-        color: var(--md-typeset-color, #666);
+        color: color-mix(in srgb, var(--md-typeset-color, #666) 70%, transparent);
         opacity: 0.85;
         margin-bottom: 32px !important;
     }
@@ -120,35 +92,6 @@
     @media screen and (min-width: 60em) {
         .hero-buttons {
             justify-content: flex-start;
-        }
-    }
-
-    .hero-logo-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .hero-logo-neon {
-        font-size: 140px;
-        line-height: 1;
-        filter: drop-shadow(0 0 60px rgba(131, 0, 254, 0.3));
-        animation: floating 4s infinite ease-in-out;
-    }
-
-    @keyframes floating {
-        0% {
-            transform: translateY(0px);
-        }
-
-        50% {
-            transform: translateY(-10px);
-            filter: drop-shadow(0 0 80px rgba(254, 135, 0, 0.3));
-        }
-
-        100% {
-            transform: translateY(0px);
         }
     }
 
@@ -169,16 +112,16 @@
         color: light-dark(var(--accent-yellow), var(--accent-orange)) !important;
     }
 
-    .grid.cards>ul>li {
-        background: var(--md-default-bg-color) !important;
+    .grid.cards > ul > li {
+        background: var(--md-default-bg-color--lightest) !important;
         transform: scale(1);
         transition: all 0.2s ease-in-out !important;
     }
 
-    .grid.cards>ul>li:hover {
-        background: color-mix(in srgb, var(--md-default-bg-color) 70%, transparent) !important;
-        border: 1px solid var(--accent-purple) !important;
-        transform: scale(1.05);
+    .grid.cards > ul > li:hover {
+        background: color-mix(in srgb, var(--md-default-bg-color--light) 70%, transparent) !important;
+        border: 1px solid var(--accent-yellow) !important;
+        transform: scale(1.025);
         z-index: 100;
     }
 
@@ -192,67 +135,27 @@
             justify-content: center;
         }
     }
+
+    .md-main {
+        background: linear-gradient(200deg, color-mix(in srgb, var(--accent-yellow), transparent 50%), transparent 30%),
+        radial-gradient(circle at top right, color-mix(in srgb, var(--accent-purple), transparent 50%), transparent 40%),
+        linear-gradient(150deg, var(--md-default-bg-color), transparent 10%),
+        radial-gradient(circle at 30% 100%, color-mix(var(--accent-purple), transparent 70%), transparent 30%),
+        radial-gradient(circle at 0% 100%, color-mix(var(--accent-red), transparent 40%), transparent 20%)
+        !important;
+    }
 </style>
 
-<script>
-    function initParticles(container) {
-        if (!container || container.children.length > 0) return;
-
-        document.querySelector('.md-main').appendChild(container);
-
-        const particleCount = 60;
-
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('bg-css-particle');
-
-            const size = (Math.random() * 8 + 1) + 'px';
-            const xStart = (Math.random() * 100) + 'vw';
-            const xEnd = `calc(${xStart} + ${(Math.random() * 50 - Math.random() * 50)}vw)`;
-            const duration = (Math.random() * 30 + 10) + 's';
-            const delay = (Math.random() * -40) + 's';
-            const opacity = Math.random() * 0.25 + 0.05;
-
-            particle.style.setProperty('--size', size);
-            particle.style.setProperty('--x-start', xStart);
-            particle.style.setProperty('--x-end', xEnd);
-            particle.style.setProperty('--duration', duration);
-            particle.style.setProperty('--delay', delay);
-            particle.style.setProperty('--opacity', `${opacity * 100}%`);
-
-            container.appendChild(particle);
-        }
-    }
-
-    function checkContainer() {
-        const container = document.getElementById('bg-particle-container');
-        if (container)
-            initParticles(container);
-    }
-
-    checkContainer();
-
-    if (!window.zensicalParticleWatcher)
-        window.zensicalParticleWatcher = setInterval(checkContainer, 600);
-</script>
-
-<div id="bg-particle-container"></div>
-
 <div class="hero-container" markdown>
-
-    <div class="hero-image">
-        <div class="hero-logo-wrapper">
-            <span class="hero-logo-neon"><img src="./assets/images/topaz_logo.png" width="250"></span>
-        </div>
-    </div>
-
     <div class="hero-text">
-        <span class="hero-title"><span class="gradient-text">Topaz</span><br>Programming<br>Language</span>
+        <span class="hero-title"><span class="gradient-text">Topaz</span><br>Programming Language</span>
         <p class="hero-tagline">Modern, fast and register-based interpreted programming language</p>
-
+        <br>
         <div class="hero-buttons">
             <a href="./get-started/" class="md-button md-button--primary">Get started</a>
-            <a href="./language-reference/introduction/" class="md-button">See documentation</a>
+            <a href="./language-reference/introduction/" class="md-button">See documentation <span class="twemoji"><svg
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path
+                    d="M5 17.59 15.59 7H9V5h10v10h-2V8.41L6.41 19z"></path></svg></span></a>
         </div>
     </div>
 
@@ -261,29 +164,34 @@
 {{ page.content }}
 
 <div class="grid cards" markdown>
-<ul>
-{% set posts_count = 0 %}
-{% set posts_max = 4 %}
-{% for p in nav["items"] if p["title"] == "Blog" %}
-    {% for year in p["children"] | sort(attribute='year', reverse=True) %}
+    <ul>
+        {% set posts_count = 0 %}
+        {% set posts_max = 4 %}
+        {% for p in nav["items"] if p["title"] == "Blog" %}
+        {% for year in p["children"] | sort(attribute='title', reverse=True) %}
         {% for post in year["children"] | sort(attribute='meta.date', reverse=True) %}
-            {% if posts_count < posts_max %}
-            <li>
-                <p style="text-align: left;">
-                    <strong style="font-size: 1.25em;">{{ post.title }}</strong><br>
-                    <em class="text-muted">{{ post.meta["date"] }}</em>
-                </p>
-                <p>{{ post.meta["description"] if post.meta["description"] else "" }}</p>
-                <p style="text-align: right;">
-                    <a href="{{ post.url }}" class="md-button" style="margin-top: 10px;">Read post...</a>
-                </p>
-            </li>
-            {% set posts_count = posts_count + 1 %}
-            {% endif %}
+        {% if posts_count < posts_max %}
+        <li>
+            <p style="text-align: left;">
+                <strong style="font-size: 1.25em; font-weight: lighter">{{ post.title }}</strong><br>
+                <em class="text-muted">{{ post.meta["date"] }}</em>
+            </p>
+            <p>{{ post.meta["description"] if post.meta["description"] else "" }}</p>
+            <p style="text-align: right;">
+                <a href="{{ post.url }}" class="md-button" style="margin-top: 10px; !important; fill: var(--accent-orange);">
+                    <span>Read post</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 16px;">
+                        <path d="M5 17.59 15.59 7H9V5h10v10h-2V8.41L6.41 19z"></path>
+                    </svg>
+                </a>
+            </p>
+        </li>
+        {% set posts_count = posts_count + 1 %}
+        {% endif %}
         {% endfor %}
-    {% endfor %}
-{% endfor %}
-</ul>
+        {% endfor %}
+        {% endfor %}
+    </ul>
 </div>
 
 <br><br>

@@ -3,7 +3,8 @@ tags:
     - Standard Library
     - Core Library
     - GUI
+    - Development
 ---
 
-# GUI window
+# GUI Window
 

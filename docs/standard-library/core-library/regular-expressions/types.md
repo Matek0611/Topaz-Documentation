@@ -5,7 +5,7 @@ tags:
     - RegEx
 ---
 
-# Auxiliary types
+# Auxiliary Types
 
 ## `RegExMatch`
 

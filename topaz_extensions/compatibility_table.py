@@ -11,7 +11,8 @@ Format:
 :::compatibility
 {
     "Windows": [
-        {"feature": "x", "support": "full", "version": "10", "timeline": [[true, "x", "2025"]] }
+        {"feature": "x", "support": "full", "version": "10", "timeline": [[true, "x", "2025"]] },
+        {"feature": "xxx", "support": "partial", "version": "26", "timeline": [[true, "xxx", "2025"]] }
     ],
     "macOS": [...],
     "Linux": [...],...
@@ -65,7 +66,7 @@ class CompatibilityBlockProcessor(BlockProcessor):
             if feature and system:
                 etree.SubElement(top_bar, 'h1', {'title': f'{feature} ({system})'}).text = f'{feature} (<em>{system}</em>)'
 
-            etree.SubElement(top_bar, 'form', {'method': 'dialog'}).text = '<button class="dialog-close">&#x1F5D9;</button>'
+            etree.SubElement(top_bar, 'form', {'method': 'dialog'}).text = '<button class="dialog-close">&times;</button>'
 
             timeline_dl = etree.SubElement(etree.SubElement(dialog, 'div'), 'dl')
             for part in add_more:
@@ -141,7 +142,7 @@ class CompatibilityBlockProcessor(BlockProcessor):
             etree.SubElement(citem, 'span').text = item[1]
 
     def run(self, parent, blocks):
-        etree.SubElement(parent, 'h2').text = 'Operating system compatibility'
+        etree.SubElement(parent, 'h2').text = 'Operating System Compatibility'
 
         try:
             data = json.loads(self.get_raw_json(blocks))

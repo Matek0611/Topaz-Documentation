@@ -1,13 +1,15 @@
 ---
+icon: material/checkbox-multiple-marked-circle-outline
 tags:
     - Build-in Type
+    - Language Reference
 ---
 
 ## `Boolean`
 
-| Property | Value |
-| -------- | ----- |
-| Size     | 1 byte (8 bits) |
+| Property | Value             |
+|----------|-------------------|
+| Size     | 1 byte (8 bits)   |
 | Values   | `false` or `true` |
 
 The simple type `Boolean` is a logical data type. Its value can be assigned to many data types. 

@@ -1,10 +1,10 @@
 ---
-title: Core GUI Library
 tags:
     - Standard Library
     - Core Library
     - GUI
+    - Development
 ---
 
-# Topaz Core GUI Library
+# Graphical User Interface
 
