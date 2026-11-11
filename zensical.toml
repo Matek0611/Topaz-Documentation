@@ -61,6 +61,7 @@ alternate_style = true
 permalink = "#"
 
 [project.markdown_extensions."topaz_extensions.compatibility_table"]
+[project.markdown_extensions."topaz_extensions.bnf_diagrams"]
 
 [project.theme]
 custom_dir = "overrides"

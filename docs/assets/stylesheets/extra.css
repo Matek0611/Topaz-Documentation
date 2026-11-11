@@ -53,9 +53,9 @@ details::details-content {
     overflow: hidden;
     opacity: 0;
     transition:
-            height 0.3s ease-out,
-            opacity 0.3s ease-out,
-            content-visibility 0.3s ease-out;
+        height 0.3s ease-out,
+        opacity 0.3s ease-out,
+        content-visibility 0.3s ease-out;
     transition-behavior: allow-discrete;
 }
 
@@ -114,7 +114,7 @@ details[open]::details-content {
     border-image-repeat: stretch;
 }
 
-.md-header__title > .md-header__ellipsis > .md-header__topic:first-child > .md-ellipsis,
+.md-header__title>.md-header__ellipsis>.md-header__topic:first-child>.md-ellipsis,
 .gradient-text {
     -webkit-text-fill-color: transparent;
     text-fill-color: transparent;
@@ -150,7 +150,7 @@ details[open]::details-content {
     width: fit-content;
 }
 
-.compat-table > thead th:first-child {
+.compat-table>thead th:first-child {
     min-width: 300px;
     max-width: 400px;
     width: 350px;
@@ -428,13 +428,14 @@ dialog::backdrop {
     scrollbar-width: thin;
 }
 
-.window-line, .window-line > * {
+.window-line,
+.window-line>* {
     overflow: hidden;
     vertical-align: middle;
     color: var(--md-code-hl-name-color);
 }
 
-.window-line > strong {
+.window-line>strong {
     color: var(--accent-orange);
     vertical-align: middle;
 }
@@ -453,4 +454,215 @@ dialog::backdrop {
     to {
         visibility: hidden;
     }
+}
+
+:root {
+    --bnf-bg: transparent;
+    --bnf-text: #2e3440;
+    --bnf-line: #4f4f4f;
+    --bnf-terminal-bg: #faf9f8;
+    --bnf-terminal-border: #9a8038;
+    --bnf-nonterminal-bg: #f7f4ee;
+    --bnf-nonterminal-border: #5c2a8d;
+    --bnf-title-color: #1e293b;
+    --bnf-card-border: #e2e8f0;
+    --bnf-switch-bg: #e2e8f0;
+    --bnf-switch-active: #ffffff;
+    --bnf-switch-active-text: #0f172a;
+    --bnf-code-bg: #f8f9fa;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bnf-text: #e5e9f0;
+        --bnf-line: #f2f2f2;
+        --bnf-terminal-bg: #2e3440;
+        --bnf-terminal-border: #d0b488;
+        --bnf-nonterminal-bg: #3b4252;
+        --bnf-nonterminal-border: #b681c1;
+        --bnf-title-color: #eceff4;
+        --bnf-card-border: #3b4252;
+        --bnf-switch-bg: #3b4252;
+        --bnf-switch-active: #4c566a;
+        --bnf-switch-active-text: #eceff4;
+        --bnf-code-bg: #2e3440;
+    }
+}
+
+[data-theme="dark"],
+[data-md-color-scheme="slate"] {
+    --bnf-text: #e5e9f0;
+    --bnf-line: #f2f2f2;
+    --bnf-terminal-bg: #2e3440;
+    --bnf-terminal-border: #d0b888;
+    --bnf-nonterminal-bg: #3b4252;
+    --bnf-nonterminal-border: #a881c1;
+    --bnf-title-color: #eceff4;
+    --bnf-card-border: #3b4252;
+    --bnf-switch-bg: #3b4252;
+    --bnf-switch-active: #4c566a;
+    --bnf-switch-active-text: #eceff4;
+    --bnf-code-bg: #2e3440;
+}
+
+.bnf-rule-card {
+    border: 1px solid var(--bnf-card-border);
+    border-radius: 8px;
+    margin: 1.2em 0;
+    overflow: hidden;
+    background: var(--bnf-bg);
+}
+
+.bnf-rule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4em 0.8em;
+    border-bottom: 1px solid var(--bnf-card-border);
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.bnf-title {
+    font-family: var(--md-text-font-family, system-ui, sans-serif);
+    font-weight: 600;
+    font-size: 0.8em;
+    color: var(--bnf-title-color);
+}
+
+.bnf-switch-labels {
+    display: inline-flex;
+    background: var(--bnf-switch-bg);
+    padding: 2px;
+    border-radius: 6px;
+    gap: 2px;
+}
+
+.bnf-label-schema,
+.bnf-label-code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    color: var(--bnf-text);
+    opacity: 0.65;
+    transition: all 0.15s ease;
+}
+
+.bnf-icon {
+    display: block;
+    width: 15px;
+    height: 15px;
+}
+
+.bnf-radio-schema,
+.bnf-radio-code {
+    position: absolute !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.bnf-radio-schema:checked~.bnf-rule-header .bnf-label-schema,
+.bnf-radio-code:checked~.bnf-rule-header .bnf-label-code {
+    background: var(--bnf-switch-active);
+    color: var(--bnf-switch-active-text);
+    opacity: 1;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.bnf-radio-schema:checked~.bnf-body-schema {
+    display: block;
+}
+
+.bnf-radio-schema:checked~.bnf-body-code {
+    display: none;
+}
+
+.bnf-radio-code:checked~.bnf-body-schema {
+    display: none;
+}
+
+.bnf-radio-code:checked~.bnf-body-code {
+    display: block;
+}
+
+.bnf-body-schema {
+    padding: 0.8em;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.bnf-body-code {
+    padding: 0;
+    margin: 0;
+    background: var(--bnf-code-bg);
+}
+
+.bnf-body-code pre {
+    margin: 0 !important;
+    padding: 0.5em 0.8em !important;
+    background: transparent !important;
+    border: none !important;
+    overflow-x: auto;
+}
+
+.bnf-body-code code {
+    font-family: var(--md-code-font-family, monospace);
+    font-size: 0.75em !important;
+    line-height: 1.35 !important;
+    color: var(--bnf-text);
+    white-space: pre-wrap;
+}
+
+svg.railroad-diagram {
+    max-width: none !important;
+    height: auto;
+    display: block;
+    background-color: transparent;
+}
+
+svg.railroad-diagram path {
+    stroke-width: 2;
+    stroke: var(--bnf-line);
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    marker-mid: none !important;
+    marker-end: none !important;
+}
+
+svg.railroad-diagram .is-optional>path:first-child,
+svg.railroad-diagram .is-optional>path:first-of-type {
+    stroke: var(--bnf-optional-line) !important;
+    stroke-dasharray: 4 3 !important;
+}
+
+svg.railroad-diagram .bnf-arrow-head {
+    fill: var(--bnf-line) !important;
+    stroke: none !important;
+}
+
+svg.railroad-diagram text {
+    font-family: var(--md-code-font-family, monospace);
+    font-size: 12px;
+    fill: var(--bnf-text);
+    text-anchor: middle;
+}
+
+svg.railroad-diagram g.terminal rect {
+    stroke-width: 2;
+    stroke: var(--bnf-terminal-border);
+    fill: var(--bnf-terminal-bg);
+    rx: 7px;
+    ry: 7px;
+}
+
+svg.railroad-diagram g.non-terminal rect {
+    stroke-width: 2;
+    stroke: var(--bnf-nonterminal-border);
+    fill: var(--bnf-nonterminal-bg);
 }
